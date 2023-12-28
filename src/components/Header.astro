@@ -4,14 +4,12 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import { defaultLang } from '../i18n/ui';
 import { getLangFromUrl, useTranslations, getPageFromUrl } from '../i18n/utils';
 
-const preferredLang = Astro.preferedLocale || defaultLang;
-const lang = getLangFromUrl(Astro.url) || preferredLang;
-const t = useTranslations(lang);
+const langFromUrl = getLangFromUrl(Astro.url, Astro.preferredLocale);
+const lang = langFromUrl || defaultLang;
 
+const t = useTranslations(lang);
 const page = getPageFromUrl(Astro.url);
 
-console.log('Preferred Locale:', Astro.preferredLocale);
-console.log('Preferred Locale List:', Astro.preferredLocaleList);
 ---
 <header>
     <nav class="bg-teal-900 mb-10">
