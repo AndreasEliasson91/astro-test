@@ -1,0 +1,29 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Startsida">
+</MainLayout>
+<script lang="ts">
+    async function initializePage(): Promise<void> {
+        try {
+        // Extract the language from the URL
+        const langFromUrl = getLangFromUrl(Astro.url);
+
+        // Check if the URL path is exactly "/"
+        if (Astro.url.pathname === '/' && !langFromUrl) {
+            await setDefaultRegionAndLanguage('sv'); // Set language explicitly to Swedish
+        } else {
+            // If not "/", or language is specified in the URL, use the language from the URL or default browser language
+            const lang = langFromUrl || getDefaultBrowserLanguage();
+            await setDefaultRegionAndLanguage(lang);
+        }
+
+        // Additional initialization code if needed
+        } catch (error) {
+        console.error('Error during page initialization:', error);
+        }
+    }
+
+        $: initializePage();
+      </script>

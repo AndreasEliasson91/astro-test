@@ -1,0 +1,23 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+
+const products = [
+  "Premier Produit",
+  "Deuxième Produit",
+  "Troisième Produit",
+  "Quatrième Produit",
+  "Cinquième Produit",
+]
+---
+
+<MainLayout title="Page Produits">
+	<ul class='w-48 text-sm font-medium rounded-lg border bg-teal-700 border-teal-600 text-white'>
+    {
+      	products.map((product) => (
+        	<li class='py-2 px-4 w-full rounded-t-lg border-b border-teal-600'>
+    		{ product }
+        	</li>
+      	))
+    }
+  	</ul>
+</MainLayout>
