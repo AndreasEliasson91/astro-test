@@ -1,5 +1,12 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
+import { Astro } from 'astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+import { defaultLang } from '../i18n/ui';
+import { getLanguage } from '../i18n/utils';
+
+const preferredLang = getLanguage(Astro.url, Astro.preferredLocale);
+const lang = preferredLang || defaultLang;
+
+return Astro.redirect( getRelativeLocaleUrl(lang, '') );
 ---
-<MainLayout title="Startsida">
-</MainLayout>

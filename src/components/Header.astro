@@ -1,14 +1,12 @@
 ---
 import { Astro } from 'astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { defaultLang } from '../i18n/ui';
-import { getLangFromUrl, useTranslations, getPageFromUrl } from '../i18n/utils';
+import { useTranslations, getRouteFromUrl } from '../i18n/utils';
 
-const langFromUrl = getLangFromUrl(Astro.url, Astro.preferredLocale);
-const lang = langFromUrl || defaultLang;
+const { language } = Astro.props;
 
-const t = useTranslations(lang);
-const page = getPageFromUrl(Astro.url);
+const t = useTranslations(language);
+const route = getRouteFromUrl(Astro.url);
 
 ---
 <header>
@@ -17,16 +15,16 @@ const page = getPageFromUrl(Astro.url);
             <div class="w-full">
                 <ul class="flex p-4 mt-4 justify-around text-lg">
                     <li>
-                        <a href={ getRelativeLocaleUrl(lang, "") } class="text-white hover:text-teal-400/50">{ t('nav.home') }</a>
+                        <a href={ getRelativeLocaleUrl(language, "") } class="text-white hover:text-teal-400/50">{ t('nav.home') }</a>
                     </li>
                     <li>
-                        <a href={ getRelativeLocaleUrl(lang, "about") } class="text-white hover:text-teal-400/50">{ t('nav.about') }</a>
+                        <a href={ getRelativeLocaleUrl(language, "about") } class="text-white hover:text-teal-400/50">{ t('nav.about') }</a>
                     </li>
                     <li>
-                        <a href={ getRelativeLocaleUrl(lang, "products") } class="text-white hover:text-teal-400/50">{ t('nav.products') }</a>
+                        <a href={ getRelativeLocaleUrl(language, "products") } class="text-white hover:text-teal-400/50">{ t('nav.products') }</a>
                     </li>
                     <li>
-                        <a href={ getRelativeLocaleUrl(lang, "contact") } class="text-white hover:text-teal-400/50">{ t('nav.contact') }</a>
+                        <a href={ getRelativeLocaleUrl(language, "contact") } class="text-white hover:text-teal-400/50">{ t('nav.contact') }</a>
                     </li>
                     
                     <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" 
@@ -40,16 +38,16 @@ const page = getPageFromUrl(Astro.url);
                     <div id="dropdownHover" class="z-10 hidden bg-teal-600 divide-y divide-teal-700 rounded-lg shadow w-44 dark:bg-teal-700">
                         <ul class="py-2 text-sm text-white dark:text-white-200" aria-labelledby="dropdownHoverButton">
                         <li>
-                            <a href={ getRelativeLocaleUrl('en', page)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">English</a>
+                            <a href={ getRelativeLocaleUrl('en', route)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">English</a>
                         </li>
                         <li>
-                            <a href={ getRelativeLocaleUrl('es', page)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">Español</a>
+                            <a href={ getRelativeLocaleUrl('es', route)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">Español</a>
                         </li>
                         <li>
-                            <a href={ getRelativeLocaleUrl('fr', page)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">Français</a>
+                            <a href={ getRelativeLocaleUrl('fr', route)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">Français</a>
                         </li>
                         <li>
-                            <a href={ getRelativeLocaleUrl('sv', page)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">Svenska</a>
+                            <a href={ getRelativeLocaleUrl('sv', route)} class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-teal-600 dark:hover:text-white">Svenska</a>
                         </li>
                         </ul>
                     </div>

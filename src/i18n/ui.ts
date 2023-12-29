@@ -1,5 +1,3 @@
-import { getLangFromIP } from "../i18n/utils";
-
 export const languages: { [key: string]: string } = {
     en: 'en',
     es: 'es',
@@ -7,8 +5,8 @@ export const languages: { [key: string]: string } = {
     sv: 'sv',
   } as const;
   
-  export const defaultLang = 'sv';
-  export const defaultPage = '/';
+  export const defaultLang = 'en';
+  export const landingPage = '/';
   
   export const langUI = {
     en: {
@@ -41,7 +39,7 @@ export const languages: { [key: string]: string } = {
     },
   } as const;
 
-export const pages = {
+export const routes = {
   home: '',
   about: 'about',
   products: 'products',

@@ -1,22 +1,27 @@
-import { langUI, pages, defaultLang, defaultPage } from './ui';
+import { langUI, routes, defaultLang, landingPage } from './ui';
 
-export function getLangFromUrl(url: URL, preferredLang: string) {
+export function getLanguage(url: URL, preferredLang: string) {
     
     const [, lang] = url.pathname.split('/');
 
     if (!lang && url.pathname === '/') {
-        if (preferredLang in langUI) return preferredLang as keyof typeof langUI;
+        if (preferredLang in langUI) {
+          return preferredLang as keyof typeof langUI;
+        }
     }
-    
-    if (lang in langUI) return lang as keyof typeof langUI;
+    else if (lang in langUI) {
+      return lang as keyof typeof langUI;
+    };
 
     return defaultLang;
     }
 
-export function getPageFromUrl(url: URL) {
-    const [, , page] = url.pathname.split('/');
-    if (page in pages) return page as keyof typeof pages;
-    return defaultPage;
+export function getRouteFromUrl(url: URL) {
+    const [, , route] = url.pathname.split('/');
+    if (route in routes) {
+      return route as keyof typeof routes;
+    }
+    return landingPage;
 }
 
 export function useTranslations(lang: keyof typeof langUI) {

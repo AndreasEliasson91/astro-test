@@ -7,10 +7,10 @@ export default defineConfig({
   output: "hybrid",
   integrations: [tailwind()],
   i18n: {
-    defaultLocale: 'sv',
+    defaultLocale: "en",
     locales: ["en", "es", "fr", "sv"],
     routing: {
-      prefixDefaultLocale: false
+      prefixDefaultLocale: true
     },
   }
 });

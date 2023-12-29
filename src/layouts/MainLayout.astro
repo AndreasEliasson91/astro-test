@@ -1,23 +1,15 @@
 ---
 import { Astro } from 'astro';
-import { getRelativeLocaleUrl } from 'astro:i18n';
-import { navigate } from 'astro:transitions/client';
 
 import Footer from "../components/Footer.astro"
 import Header from "../components/Header.astro"
 import "../styles/global.css"
 
 import { defaultLang } from '../i18n/ui';
-import { getLangFromUrl, useTranslations, getPageFromUrl } from '../i18n/utils';
+import { getLanguage } from '../i18n/utils';
 
-const preferredLang = Astro.preferredLocale || defaultLang;
-const langFromUrl = getLangFromUrl(Astro.url, Astro.preferredLocale);
-const lang = langFromUrl || defaultLang;
-
-if (Astro.url.pathname === '/') {
-	console.log(getRelativeLocaleUrl(preferredLang, ''));
-  	navigate( getRelativeLocaleUrl(preferredLang, '') );
-}
+const preferredLang = getLanguage(Astro.url, Astro.preferredLocale);
+const lang = preferredLang || defaultLang;
 
 const { title } = Astro.props;
 ---
@@ -32,14 +24,14 @@ const { title } = Astro.props;
 		<title>{ title }</title>
 	</head>
 	<body class="flex flex-col min-h-screen">
-        <Header />
+        <Header language={ lang } />
 		
         <div class="flex-grow flex flex-col items-center justify-center">
 			<h1 class="text-4xl">{ title }</h1>
             <slot />
         </div>
         
-        <Footer />
+        <Footer language={ lang } />
 
 		<script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
 	</body>
